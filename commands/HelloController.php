@@ -27,4 +27,8 @@ class HelloController extends Controller
     {
         echo $message . "\n";
     }
+
+    public function actionCreate($message = 'message') {
+      echo $message . "\n";
+    }
 }
