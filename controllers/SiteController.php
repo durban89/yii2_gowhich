@@ -14,6 +14,12 @@ define('PUBLICPEM_PATH', '/Users/durban126/nodejs/qeeniao-wap-web/app/test/data/
 /*私钥 */             
 define('PRIVATEPEM_PATH', '/Users/durban126/nodejs/qeeniao-wap-web/app/test/data/jiufu/test/9f_KDJZ_private.pem');
 
+/*base64 文件*/
+define('BASE64_DATA_PATH', '/Users/durban126/nodejs/qeeniao-wap-web/tmp/data.txt');
+
+/*pdf 空文件*/
+define('PDF_FILE_PATH', '/Users/durban126/nodejs/qeeniao-wap-web/tmp/out.pdf.gz');
+
 class SiteController extends Controller
 {
     public function behaviors()
@@ -203,6 +209,52 @@ class SiteController extends Controller
         echo "<br />";
 
         // return $this->render('index');
+    }
+
+    /**
+     * base 64 string 压缩文件 转 pdf 并解压 pdf文件
+     * @return [type] [description]
+     */
+    public function actionPdf(){
+        $pdf_base64 = BASE64_DATA_PATH;
+        //Get File content from txt file
+        $pdf_base64_handler = fopen($pdf_base64,'r');
+        $pdf_content = fread ($pdf_base64_handler,filesize($pdf_base64));
+        fclose ($pdf_base64_handler);
+        //Decode pdf content
+        $pdf_decoded = base64_decode ($pdf_content);
+        //Write data back to pdf file
+        $pdf = fopen (PDF_FILE_PATH,'w');
+        fwrite ($pdf,$pdf_decoded);
+        //close output file
+        fclose ($pdf);
+
+        // This input should be from somewhere else, hard-coded in this example
+        $file_name = PDF_FILE_PATH;
+
+        // Raising this value may increase performance
+        $buffer_size = 4096; // read 4kb at a time
+        $out_file_name = str_replace('.gz', '', $file_name);
+
+        // Open our files (in binary mode)
+        $file = gzopen($file_name, 'rb');
+        $out_file = fopen($out_file_name, 'wb');
+
+        // Keep repeating until the end of the input file
+        while(!gzeof($file)) {
+            // Read buffer-size bytes
+            // Both fwrite and gzread and binary-safe
+            fwrite($out_file, gzread($file, $buffer_size));
+        }
+
+        // Files are done, close files
+        fclose($out_file);
+        gzclose($file);
+
+
+        // $base64Data = file_get_contents(BASE64_DATA_PATH);
+        // $data = base64_decode($base64Data);
+        // file_put_contents(PDF_FILE_PATH,$data);
     }
 
     public function actionLogin()
