@@ -16,11 +16,16 @@ use yii\web\AssetBundle;
 class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
-    public $baseUrl = '@web';
-    public $css = [
+    public $baseUrl  = '@web';
+    public $css      = [
+        'css/bootstrap-material-design.min.css',
+        'css/ripples.min.css',
         'css/site.css',
     ];
     public $js = [
+        'js/material.min.js',
+        'js/ripples.min.js',
+        'js/custom.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

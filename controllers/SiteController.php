@@ -2,23 +2,12 @@
 
 namespace app\controllers;
 
+use app\models\ContactForm;
+use app\models\LoginForm;
 use Yii;
 use yii\filters\AccessControl;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
-
-/*公钥 */             
-define('PUBLICPEM_PATH', '/Users/durban126/nodejs/qeeniao-wap-web/app/test/data/jiufu/test/9fwlc_public.pem');
-/*私钥 */             
-define('PRIVATEPEM_PATH', '/Users/durban126/nodejs/qeeniao-wap-web/app/test/data/jiufu/test/9f_KDJZ_private.pem');
-
-/*base64 文件*/
-define('BASE64_DATA_PATH', '/Users/durban126/nodejs/qeeniao-wap-web/tmp/data.txt');
-
-/*pdf 空文件*/
-define('PDF_FILE_PATH', '/Users/durban126/nodejs/qeeniao-wap-web/tmp/out.pdf.gz');
+use yii\web\Controller;
 
 class SiteController extends Controller
 {
@@ -27,17 +16,17 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only'  => ['logout'],
                 'rules' => [
                     [
                         'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
+                        'allow'   => true,
+                        'roles'   => ['@'],
                     ],
                 ],
             ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
+            'verbs'  => [
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'logout' => ['post'],
                 ],
@@ -48,11 +37,11 @@ class SiteController extends Controller
     public function actions()
     {
         return [
-            'error' => [
+            'error'   => [
                 'class' => 'yii\web\ErrorAction',
             ],
             'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
+                'class'           => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
@@ -65,18 +54,19 @@ class SiteController extends Controller
      * @param  [type] $p_postData [参数]
      * @return array Json 数组
      */
-    public static function loadJsonByUAP($p_url,$p_postData=null,$p_method='post'){
+    public static function loadJsonByUAP($p_url, $p_postData = null, $p_method = 'post')
+    {
         // 加密请求参数
-        
-        $secretData = W2RSA::rsaEncrypt($p_postData,PUBLICPEM_PATH);
+
+        $secretData = W2RSA::rsaEncrypt($p_postData, PUBLICPEM_PATH);
         // 加密签名
-        $secretSign = W2RSA::rsaSign(base64_decode($secretData),PRIVATEPEM_PATH);
+        $secretSign = W2RSA::rsaSign(base64_decode($secretData), PRIVATEPEM_PATH);
 
         // 请求接口
-        $resultInfo = W2Web::loadJsonByUrl($p_url,$p_method,http_build_query(array('data' => $secretData,'sign' => $secretSign)));
+        $resultInfo = W2Web::loadJsonByUrl($p_url, $p_method, http_build_query(array('data' => $secretData, 'sign' => $secretSign)));
 
         // 解密接口返回数据
-        $resultData = W2RSA::rsaDecrypt($resultInfo['data'],PRIVATEPEM_PATH);
+        $resultData = W2RSA::rsaDecrypt($resultInfo['data'], PRIVATEPEM_PATH);
         // 对json格式的字符串进行转换成数组
         $resultData = self::getArrayFromJosonFormatString($resultData);
 
@@ -88,13 +78,14 @@ class SiteController extends Controller
      * @param $public_key 商户公钥文件路径 或 密钥内容本身
      * return 加密后内容，明文
      */
-    public function rsaEncrypt($content, $public_key) {
+    public function rsaEncrypt($content, $public_key)
+    {
         $priKey = file_get_contents($public_key);
-        $res = openssl_get_publickey($priKey);
+        $res    = openssl_get_publickey($priKey);
         //把需要加密的内容，按128位拆开加密
-        $result  = '';
-        for($i = 0; $i < ((strlen($content) - strlen($content)%117)/117+1); $i++  ) {
-            $data = mb_strcut($content, $i*117, 117, 'utf-8');
+        $result = '';
+        for ($i = 0; $i < ((strlen($content) - strlen($content) % 117) / 117 + 1); $i++) {
+            $data = mb_strcut($content, $i * 117, 117, 'utf-8');
             openssl_public_encrypt($data, $encrypted, $res);
             $result .= $encrypted;
         }
@@ -109,9 +100,10 @@ class SiteController extends Controller
      * @param $private_key 商户私钥文件路径 或 密钥内容本身
      * return 签名结果
      */
-    public function rsaSign($data, $private_key) {
+    public function rsaSign($data, $private_key)
+    {
         $priKey = file_get_contents($private_key);
-        $res = openssl_get_privatekey($priKey);
+        $res    = openssl_get_privatekey($priKey);
         openssl_sign($data, $sign, $res);
         openssl_free_key($res);
         //base64编码
@@ -125,10 +117,11 @@ class SiteController extends Controller
      * @param $sign 要校对的的签名结果
      * return 验证结果
      */
-    public function rsaVerify($data, $ali_public_key, $sign)  {
+    public function rsaVerify($data, $ali_public_key, $sign)
+    {
         $pubKey = file_get_contents($ali_public_key);
-        $res = openssl_get_publickey($pubKey);
-        $result = (bool)openssl_verify($data, base64_decode($sign), $res);
+        $res    = openssl_get_publickey($pubKey);
+        $result = (bool) openssl_verify($data, base64_decode($sign), $res);
         openssl_free_key($res);
         return $result;
     }
@@ -138,16 +131,17 @@ class SiteController extends Controller
      * @param $private_key 商户私钥文件路径 或 密钥内容本身
      * return 解密后内容，明文
      */
-    public function rsaDecrypt($content, $private_key) {
+    public function rsaDecrypt($content, $private_key)
+    {
         $priKey = file_get_contents($private_key);
-        $res = openssl_get_privatekey($priKey);
+        $res    = openssl_get_privatekey($priKey);
         // var_dump($priKey);
         // var_dump($res);exit();
         //用base64将内容还原成二进制
         $content = base64_decode($content);
         //把需要解密的内容，按128位拆开解密
-        $result  = '';
-        for($i = 0; $i < strlen($content)/128; $i++  ) {
+        $result = '';
+        for ($i = 0; $i < strlen($content) / 128; $i++) {
             $data = substr($content, $i * 128, 128);
             openssl_private_decrypt($data, $decrypt, $res);
             $result .= $decrypt;
@@ -156,92 +150,43 @@ class SiteController extends Controller
         return $result;
     }
 
-
     public function actionIndex()
-    {   
-        $postData = array(
-            'inputCharset'=>'1',
-            'version'=>'1.0',
-            'channelId'=>'1037'
-        );
-        //加密
-        echo json_encode($postData);
-        echo "<br />";
-        $secretData = $this->rsaEncrypt(json_encode($postData), PUBLICPEM_PATH);
-        echo 'secretData = '.$secretData;
-        echo "<br />";
-        // 签名
-        $secretSign = $this->rsaSign(base64_decode($secretData), PRIVATEPEM_PATH);
-        echo 'secretSign = '.$secretSign;
-        echo "<br />";
-        $data = array(
-            'data'=>$secretData,
-            'sign'=>$secretSign
-        );
-
-        var_dump($data);
-        echo "<br />";
-        $getUrl = "http://123.57.152.189:8895/wlcapi/general2/KDJZ/productInfo.html?".http_build_query(array('data' => $secretData,'sign' => $secretSign));
-        $postUrl = "http://123.57.152.189:8895/wlcapi/general2/KDJZ/productInfo.html";
-        $ch = curl_init();  
-        curl_setopt($ch, CURLOPT_URL, $postUrl);
-        curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //如果把这行注释掉的话，就会直接输出  
-        curl_setopt($ch, CURLOPT_POST, 1);  
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array('data' => $secretData,'sign' => $secretSign)));
-        $result=curl_exec($ch);  
-        curl_close($ch);
-        echo "<br />";
-        var_dump($result);
-
-        $result = json_decode($result, true);
-
-        // $resultInfo = ($p_url,$p_method,http_build_query(array('data' => $secretData,'sign' => $secretSign));
-        
-        echo "<br />";
-
-        //这个是验签的
-        $veifyRes =  $this->rsaVerify(base64_decode($result['data']),PUBLICPEM_PATH,$result['sign']);
-        var_dump($veifyRes);
-        echo "<br />";
-        $decryptData = $this->rsaDecrypt("d6jDboPO2hPg43Bp8ouuZ1+Ez1PmATKQlE5OHOGU41WjsFWukqvxhH+YhLJdN3SnBZzRB2E+FzC7ZV5WuuJulSzyWuseTKLvG0t3rXgK4zyWcqRACHwz05EhMftEwHqjZxweV7X+vk+m/kjFvikKUJP5/LpiHE2wRDk4IuruAzpTo9Y/KQJYoYOUemo1RrFSDfkoPEwqLtf2EvK/E9tGAkfG4arY/+QrPtc6PVjaTRv3F2m8bLPkR+kn2zr1JR4z6mkjnq3YJ2/KkcDSHJ2ZoK+N846JJXNBBz1wj3MU57ZD0ghqU4lIzkRJUGqTt5BZA2TzlkmRRQm6b7FfRQRNEg==", PRIVATEPEM_PATH);
-        var_dump('decryptData = ',$decryptData);
-        echo "<br />";
-
-        // return $this->render('index');
+    {
+        return $this->render('index');
     }
 
     /**
      * base 64 string 压缩文件 转 pdf 并解压 pdf文件
      * @return [type] [description]
      */
-    public function actionPdf(){
+    public function actionPdf()
+    {
         $pdf_base64 = BASE64_DATA_PATH;
         //Get File content from txt file
-        $pdf_base64_handler = fopen($pdf_base64,'r');
-        $pdf_content = fread ($pdf_base64_handler,filesize($pdf_base64));
-        fclose ($pdf_base64_handler);
+        $pdf_base64_handler = fopen($pdf_base64, 'r');
+        $pdf_content        = fread($pdf_base64_handler, filesize($pdf_base64));
+        fclose($pdf_base64_handler);
         //Decode pdf content
-        $pdf_decoded = base64_decode ($pdf_content);
+        $pdf_decoded = base64_decode($pdf_content);
         //Write data back to pdf file
-        $pdf = fopen (PDF_FILE_PATH,'w');
-        fwrite ($pdf,$pdf_decoded);
+        $pdf = fopen(PDF_FILE_PATH, 'w');
+        fwrite($pdf, $pdf_decoded);
         //close output file
-        fclose ($pdf);
+        fclose($pdf);
 
         // This input should be from somewhere else, hard-coded in this example
         $file_name = PDF_FILE_PATH;
 
         // Raising this value may increase performance
-        $buffer_size = 4096; // read 4kb at a time
+        $buffer_size   = 4096; // read 4kb at a time
         $out_file_name = str_replace('.gz', '', $file_name);
 
         // Open our files (in binary mode)
-        $file = gzopen($file_name, 'rb');
+        $file     = gzopen($file_name, 'rb');
         $out_file = fopen($out_file_name, 'wb');
 
         // Keep repeating until the end of the input file
-        while(!gzeof($file)) {
+        while (!gzeof($file)) {
             // Read buffer-size bytes
             // Both fwrite and gzread and binary-safe
             fwrite($out_file, gzread($file, $buffer_size));
@@ -250,7 +195,6 @@ class SiteController extends Controller
         // Files are done, close files
         fclose($out_file);
         gzclose($file);
-
 
         // $base64Data = file_get_contents(BASE64_DATA_PATH);
         // $data = base64_decode($base64Data);
