@@ -20,7 +20,7 @@ class AppAsset extends AssetBundle
     public $css      = [
         'css/bootstrap-material-design.min.css',
         'css/ripples.min.css',
-        'css/site.css',
+        'css/styles.css',
     ];
     public $js = [
         'js/material.min.js',
@@ -30,5 +30,6 @@ class AppAsset extends AssetBundle
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap\BootstrapPluginAsset',
     ];
 }
