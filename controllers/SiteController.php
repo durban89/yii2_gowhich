@@ -240,4 +240,29 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionAuthor()
+    {
+        return $this->render('author');
+    }
+
+    public function actionCategory()
+    {
+        return $this->render('category');
+    }
+
+    public function actionSearch()
+    {
+        return $this->render('search');
+    }
+
+    public function actionDetail()
+    {
+
+    }
+
+    public function actionTag()
+    {
+        return $this->render('tag');
+    }
 }

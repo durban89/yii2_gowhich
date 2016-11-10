@@ -1,3 +1,7 @@
+<?php
+use yii\helpers\Html;
+use yii\helpers\Url;
+?>
 <aside class="sidebar col-md-3" role="complementary">
     <div id="recent-posts-3" class="widget widget_recent_entries">
         <img src='http://7sbph3.com1.z0.glb.clouddn.com/2.png' width="100%" />
@@ -32,14 +36,14 @@
         </ul>
     </div>
 
+    <?php if (isset($blogCategory) && count($blogCategory)): ?>
     <div id="categories-3" class="widget widget_categories">
         <h5 class="widget-title">Categories</h5>
         <ul>
-            <li class="cat-item cat-item-6"><a href="https://wp-themes.com/?cat=6" >First Child Category</a></li>
-            <li class="cat-item cat-item-8"><a href="https://wp-themes.com/?cat=8" >One Grandchild Category</a></li>
-            <li class="cat-item cat-item-5"><a href="https://wp-themes.com/?cat=5" >Parent</a></li>
-            <li class="cat-item cat-item-7"><a href="https://wp-themes.com/?cat=7" >Second Child Category</a></li>
-            <li class="cat-item cat-item-1"><a href="https://wp-themes.com/?cat=1" >Uncategorized</a></li>
+            <?php foreach ($blogCategory as $v): ?>
+            <li class="cat-item cat-item-<?=$v->id;?>"><a title='<?=Html::encode($v->name);?>' href="<?=Url::toRoute(['category/view', 'category' => Html::encode(urlencode($v->name))]);?>" ><?=$v->name;?></a></li>
+            <?php endforeach;?>
         </ul>
     </div>
+    <?php endif;?>
 </aside>
