@@ -1,3 +1,8 @@
+<?php
+
+use yii\helpers\Url;
+
+?>
 <header class="site-header" role="banner">
     <div class="container-fluid">
         <div class="row">
@@ -30,7 +35,7 @@
                         <div class="collapse navbar-collapse navbar-responsive-collapse">
                             <div class="site-menu">
                                 <ul class="nav navbar-nav">
-                                    <li class="active"><a href="javascript:void(0)">首页</a></li>
+                                    <li class="active"><a href="<?=Url::to(['site/index']);?>">首页</a></li>
                                     <li><a href="javascript:void(0)">Link</a></li>
                                     <li class="dropdown">
                                         <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -48,9 +53,10 @@
                                         </ul>
                                     </li>
                                 </ul>
-                                <form class="navbar-form navbar-right">
+                                <form class="navbar-form navbar-right" id='blogSearchForm' method="get" action="<?=Url::to(['search/index']);?>">
                                     <div class="form-group">
-                                        <input type="text" class="form-control col-md-8" placeholder="Search">
+                                        <input style='display:none' />
+                                        <input type="text" class="form-control col-md-8" name="keywords" placeholder="Search" onKeypress="javascript:if(event.keyCode==13) {doSearch();return false;}"/>
                                     </div>
                                 </form>
                             </div>
