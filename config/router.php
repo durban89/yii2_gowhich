@@ -14,8 +14,14 @@ return [
     'category/<category:.*?>' => 'category/view',
     'tag'                     => 'tag/index',
     'tag/<tag:.*?>'           => 'tag/view',
-    'search/'                 => 'search/index',
+    'search'                  => 'search/index',
     'type/search/<id:\d+>'    => 'search/index',
     'author/<author:.*?>'     => 'author/view',
     'author'                  => 'author/index',
+
+    'feed/'                   => 'site/feed',
+    'sitemap.xsl/'            => 'site/sitemapxsl',
+    'sitemap.xml/'            => 'site/sitemap',
+
+    '/<t:.*?>'                => 'site/index',
 ];
