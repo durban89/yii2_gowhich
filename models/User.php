@@ -2,102 +2,99 @@
 
 namespace app\models;
 
-class User extends \yii\base\Object implements \yii\web\IdentityInterface
+use Yii;
+
+/**
+ * This is the model class for table "tbl_user".
+ *
+ * @property integer $id
+ * @property string $username
+ * @property string $firstname
+ * @property string $lastname
+ * @property string $password
+ * @property integer $role_id
+ * @property integer $group_id
+ * @property string $email
+ * @property string $qq
+ * @property string $sex
+ * @property string $phone
+ * @property string $weibo
+ * @property string $profile
+ * @property string $notes
+ * @property string $company
+ * @property string $website
+ * @property string $address
+ * @property string $city
+ * @property string $state
+ * @property string $postcode
+ * @property string $login_ip
+ * @property integer $login_time
+ * @property string $login_date
+ * @property integer $is_delete
+ * @property integer $is_lock
+ * @property string $create_date
+ * @property string $update_date
+ */
+class User extends \yii\db\ActiveRecord
 {
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
-
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
-
     /**
      * @inheritdoc
      */
-    public static function findIdentity($id)
+    public static function tableName()
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        return 'tbl_user';
     }
 
     /**
      * @inheritdoc
      */
-    public static function findIdentityByAccessToken($token, $type = null)
+    public function rules()
     {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Finds user by username
-     *
-     * @param  string      $username
-     * @return static|null
-     */
-    public static function findByUsername($username)
-    {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        return [
+            [['username', 'firstname', 'lastname', 'password', 'role_id', 'group_id', 'email', 'notes', 'company', 'website', 'address', 'city', 'state', 'postcode', 'create_date'], 'required'],
+            [['role_id', 'group_id', 'login_time', 'is_delete', 'is_lock'], 'integer'],
+            [['profile', 'notes'], 'string'],
+            [['login_date', 'create_date', 'update_date'], 'safe'],
+            [['username', 'password', 'email'], 'string', 'max' => 128],
+            [['firstname', 'lastname', 'website', 'address', 'city', 'state', 'postcode'], 'string', 'max' => 200],
+            [['qq', 'sex', 'phone', 'weibo', 'login_ip'], 'string', 'max' => 100],
+            [['company'], 'string', 'max' => 20],
+        ];
     }
 
     /**
      * @inheritdoc
      */
-    public function getId()
+    public function attributeLabels()
     {
-        return $this->id;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getAuthKey()
-    {
-        return $this->authKey;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function validateAuthKey($authKey)
-    {
-        return $this->authKey === $authKey;
-    }
-
-    /**
-     * Validates password
-     *
-     * @param  string  $password password to validate
-     * @return boolean if password provided is valid for current user
-     */
-    public function validatePassword($password)
-    {
-        return $this->password === $password;
+        return [
+            'id' => 'ID',
+            'username' => 'Username',
+            'firstname' => 'Firstname',
+            'lastname' => 'Lastname',
+            'password' => 'Password',
+            'role_id' => 'Role ID',
+            'group_id' => 'Group ID',
+            'email' => 'Email',
+            'qq' => 'Qq',
+            'sex' => 'Sex',
+            'phone' => 'Phone',
+            'weibo' => 'Weibo',
+            'profile' => 'Profile',
+            'notes' => 'Notes',
+            'company' => 'Company',
+            'website' => 'Website',
+            'address' => 'Address',
+            'city' => 'City',
+            'state' => 'State',
+            'postcode' => 'Postcode',
+            'login_ip' => 'Login Ip',
+            'login_time' => 'Login Time',
+            'login_date' => 'Login Date',
+            'is_delete' => 'Is Delete',
+            'is_lock' => 'Is Lock',
+            'create_date' => 'Create Date',
+            'update_date' => 'Update Date',
+        ];
     }
 }

@@ -9,7 +9,7 @@
 
     <div class="container header-contents">
         <div class="row">
-            <div class="col-xs-9 sitelogo">
+            <div class="col-xs-12 sitelogo">
                 <div class="site-logo">
                     <a href="/" rel="home"><?=Yii::$app->params['name'];?></a>
                     <div class="tagline"><?=Yii::$app->params['description'];?></div>

@@ -3,15 +3,15 @@
 namespace app\controllers;
 
 use app\models\Blog;
-use app\models\Type;
+use app\models\User;
 use yii\data\Pagination;
 
-class CategoryController extends \yii\web\Controller
+class AuthorController extends \yii\web\Controller
 {
     public function actionIndex()
     {
 
-        $models = Type::find()->where(['category' => 'blog'])
+        $models = User::find()->where(['is_lock' => 0, 'is_delete' => 0])
             ->orderBy('create_date', SORT_DESC)
             ->all();
 
@@ -19,15 +19,15 @@ class CategoryController extends \yii\web\Controller
 
     }
 
-    public function actionView($category)
+    public function actionView($author)
     {
 
-        if ($category) {
-            $category = urldecode($category);
-            $res      = Type::find()->where(["name" => $category])->one();
+        if ($author) {
+            $author = urldecode($author);
+            $res    = User::find()->where(["username" => $author])->one();
 
             if ($res) {
-                $query = Blog::find()->where(['type_id' => $res->id, 'is_lock' => 0, 'is_delete' => 0])
+                $query = Blog::find()->where(['user_id' => $res->id, 'is_lock' => 0, 'is_delete' => 0])
                     ->orderBy(['create_date' => SORT_DESC]);
 
                 $pagination = new Pagination(['totalCount' => $query->count(), 'pageSize' => 12]);
@@ -37,16 +37,16 @@ class CategoryController extends \yii\web\Controller
                     ->all();
 
                 return $this->render('view', [
-                    'category'   => $category,
+                    'author'     => $author,
                     'pagination' => $pagination,
                     'models'     => $models,
                 ]);
             } else {
-                $this->redirect(Url::to(['category/index']));
+                $this->redirect(Url::to(['author/index']));
             }
 
         } else {
-            $this->redirect(Url::to(['category/index']));
+            $this->redirect(Url::to(['author/index']));
         }
 
     }

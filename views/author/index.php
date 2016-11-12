@@ -6,7 +6,7 @@ use yii\helpers\Url;
 
 <header class="page-header">
     <h3>
-        Categories
+        Authors
     </h3>
 
     <!-- <p>Category描述</p> -->
@@ -17,9 +17,9 @@ use yii\helpers\Url;
 <div id="categories" class="widget widget_categories">
 	<ul>
 	    <?php foreach ($models as $v): ?>
-		<li class="cat-item cat-item-<?=$v->id;?>" style='display: inline-block;margin: 5px'>
+		<li class="author-item author-item-<?=$v->id;?>" style='display: inline-block;margin: 5px'>
 			<span class=" ">
-				<a title='<?=Html::encode($v->name);?>' href="<?=Url::toRoute(['category/view', 'category' => Html::encode(urlencode($v->name))]);?>" ><?=$v->name;?></a>
+				<a title='<?=Html::encode($v->username);?>' href="<?=Url::toRoute(['author/view', 'author' => Html::encode(urlencode($v->username))]);?>" ><?=$v->username;?></a>
 			</span>
 		</li>
 	    <?php endforeach;?>
