@@ -16,6 +16,6 @@ return [
     'tag/<tag:.*?>'           => 'tag/view',
     'search/'                 => 'search/index',
     'type/search/<id:\d+>'    => 'search/index',
-    'author/<author:.*?>'     => 'author/index',
-    'author'                  => 'author/view',
+    'author/<author:.*?>'     => 'author/view',
+    'author'                  => 'author/index',
 ];
