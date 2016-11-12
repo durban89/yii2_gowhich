@@ -1,3 +1,7 @@
+function doSearch(){
+  $('#blogSearchForm').submit();
+}
+
 $(function(){
   $.material.init();
 
