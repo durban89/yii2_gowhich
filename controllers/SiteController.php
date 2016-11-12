@@ -9,6 +9,7 @@ use Yii;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\Controller;
 
@@ -55,13 +56,13 @@ class SiteController extends Controller
         // 搜索跳转
         $t = Yii::$app->request->get('t', '');
         if ($t) {
-            $this->redirect(Url::to(['search/index', 'keywords' => $v]));
+            $this->redirect(Url::to(['search/index', 'keywords' => $t]));
         }
 
         // tag 链接指向
         $tag = Yii::$app->request->get('tag', '');
         if ($tag) {
-            $this->redirect(Url::to(['tag/index', 'tag' => CHtml::encode($tag)]));
+            $this->redirect(Url::to(['tag/index', 'tag' => Html::encode($tag)]));
         }
 
         $query = Blog::find()->where([
