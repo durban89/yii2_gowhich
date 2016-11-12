@@ -1,3 +1,5 @@
 $(function(){
-  $.material.init()  
+  $.material.init();
+
+  $("time.timeago").timeago();
 })
