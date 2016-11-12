@@ -35,22 +35,23 @@ use yii\helpers\Url;
                         <div class="collapse navbar-collapse navbar-responsive-collapse">
                             <div class="site-menu">
                                 <ul class="nav navbar-nav">
-                                    <li class="active"><a href="<?=Url::to(['site/index']);?>">首页</a></li>
-                                    <li><a href="javascript:void(0)">Link</a></li>
+                                    <li class="active"><a href="<?=Url::to(['site/index']);?>">Home</a></li>
+                                    <li><a href="<?=Url::to(['site/about']);?>">About Me</a></li>
                                     <li class="dropdown">
                                         <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            Dropdown
+                                            Online Study
                                             <b class="caret"></b>
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="javascript:void(0)">Action</a></li>
-                                            <li><a href="javascript:void(0)">Another action</a></li>
-                                            <li><a href="javascript:void(0)">Something else here</a></li>
-                                            <li class="divider"></li>
-                                            <li class="dropdown-header">Dropdown header</li>
-                                            <li><a href="javascript:void(0)">Separated link</a></li>
-                                            <li><a href="javascript:void(0)">One more separated link</a></li>
+                                            <li><a href="<?=Url::to(['site/video']);?>">iOS Video</a></li>
+                                            <li><a href="<?=Url::to(['site/resource']);?>">Technical Books</a></li>
                                         </ul>
+                                    </li>
+                                    <li>
+                                        <a href="<?=Url::to(['site/social']);?>">Social Hub</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?=Url::to(['site/tools']);?>">Quick Access</a>
                                     </li>
                                 </ul>
                                 <form class="navbar-form navbar-right" id='blogSearchForm' method="get" action="<?=Url::to(['search/index']);?>">
