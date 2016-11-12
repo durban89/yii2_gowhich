@@ -57,11 +57,7 @@ NavBar::end();
 ;?>
 
     <div class="container">
-<?php
-echo Breadcrumbs::widget([
-    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-]);
-?>
+        <?=Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : []]);?>
         <div class="row">
             <div class="main-content col-md-9" role="main">
             <?=$content;?>

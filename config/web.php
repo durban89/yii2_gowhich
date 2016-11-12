@@ -40,6 +40,17 @@ $config = [
                     'class'  => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
+
+                [
+                    'class'      => 'yii\log\EmailTarget',
+                    'levels'     => ['error'],
+                    'categories' => ['yii\db\*'],
+                    'message'    => [
+                        'from'    => ['admin@gowhich.com'],
+                        'to'      => ['zhangdapeng89@126.com'],
+                        'subject' => 'Database errors at gowhich.com',
+                    ],
+                ],
             ],
         ],
         'db'           => require __DIR__ . '/db.php',
