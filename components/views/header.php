@@ -8,15 +8,15 @@ use yii\helpers\Url;
         <div class="row">
             <div class="col-xs-12 banner">
                 <img class="site-banner" src="/images/banner.png" width="1920"  alt="" />
-            </div><!-- /.col-xs-12 -->
-        </div><!-- /.row -->
-    </div> <!-- end banner -->
+            </div>
+        </div>
+    </div>
 
     <div class="container header-contents">
         <div class="row">
             <div class="col-xs-12 sitelogo">
                 <div class="site-logo">
-                    <a href="/" rel="home"><?=Yii::$app->params['name'];?></a>
+                    <a href="<?=Url::to(['site/index']);?>" rel="home"><?=Yii::$app->params['name'];?></a>
                     <div class="tagline"><?=Yii::$app->params['description'];?></div>
                 </div>
             </div>
@@ -35,15 +35,33 @@ use yii\helpers\Url;
                         <div class="collapse navbar-collapse navbar-responsive-collapse">
                             <div class="site-menu">
                                 <ul class="nav navbar-nav">
-                                    <li class="active"><a href="<?=Url::to(['site/index']);?>">Home</a></li>
-                                    <li><a href="<?=Url::to(['site/about']);?>">About Me</a></li>
-                                    <li class="dropdown">
+                                    <?php foreach ($nav as $k => $v): ?>
+                                        <?php if (isset($v['child'])): ?>
+                                        <li class="dropdown <?=$v['active'] ? 'active' : '';?>">
+                                            <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <?=$v['title'];?>
+                                                <b class="caret"></b>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <?php foreach ($v['child'] as $ck => $cv): ?>
+                                                <li class="<?=$cv['active'] ? 'active' : '';?>"><a href="<?=$cv['link'];?>"><?=$cv['title'];?></a></li>
+                                                <?php endforeach;?>
+                                            </ul>
+                                        </li>
+                                        <?php else: ?>
+                                        <li class="<?=$v['active'] ? 'active' : '';?>"><a href="<?=$v['link'];?>"><?=$v['title'];?></a></li>
+                                        <?php endif;?>
+
+                                    <?php endforeach;?>
+
+                                    <!-- <li><a href="<?=Url::to(['site/about']);?>">About Me</a></li>
+                                    <li class="dropdown active">
                                         <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
                                             Online Study
                                             <b class="caret"></b>
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="<?=Url::to(['site/video']);?>">iOS Video</a></li>
+                                            <li class="active"><a href="<?=Url::to(['site/video']);?>">iOS Video</a></li>
                                             <li><a href="<?=Url::to(['site/resource']);?>">Technical Books</a></li>
                                         </ul>
                                     </li>
@@ -52,7 +70,7 @@ use yii\helpers\Url;
                                     </li>
                                     <li>
                                         <a href="<?=Url::to(['site/tools']);?>">Quick Access</a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                                 <form class="navbar-form navbar-right" id='blogSearchForm' method="get" action="<?=Url::to(['search/index']);?>">
                                     <div class="form-group">
