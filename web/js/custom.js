@@ -5,5 +5,11 @@ function doSearch(){
 $(function(){
   $.material.init();
 
-  $("time.timeago").timeago();
+  if($.isFunction($.timeago)){
+    $("time.timeago").timeago();
+  }
+
+  if($.isFunction($.fancybox)){
+    $('.fancybox').fancybox();
+  }
 })
