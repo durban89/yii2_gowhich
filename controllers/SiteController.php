@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\RSS;
 use app\models\Blog;
 use app\models\ContactForm;
 use app\models\File;
@@ -148,29 +149,36 @@ class SiteController extends Controller
     }
     public function actionFeed()
     {
-        $criteria            = new CDbCriteria();
-        $criteria->condition = 'is_lock = :is_lock AND is_delete = :is_delete';
-        $criteria->order     = 'create_date DESC';
-        $criteria->limit     = 50;
-        $criteria->offset    = 0;
-        $criteria->params    = array(
-            ':is_lock'   => 0,
-            ':is_delete' => 0,
-        );
-        $models = Blog::model()->findAll($criteria);
+        $model = Blog::find()->where([
+            'is_delete' => 0,
+            'is_lock'   => 0,
+        ])->orderBy('create_date', SORT_DESC)
+            ->offset(0)
+            ->limit(50)->all();
+
+        // $criteria            = new CDbCriteria();
+        // $criteria->condition = 'is_lock = :is_lock AND is_delete = :is_delete';
+        // $criteria->order     = 'create_date DESC';
+        // $criteria->limit     = 50;
+        // $criteria->offset    = 0;
+        // $criteria->params    = array(
+        //     ':is_lock'   => 0,
+        //     ':is_delete' => 0,
+        // );
+        // $models = Blog::model()->findAll($criteria);
 
         //rss创建
-        $feedTitle = Yii::app()->params['title'];
-        $rss       = new Rss($feedTitle, Yii::app()->request->hostInfo, Yii::app()->params['description']);
-        $rss->setWebMaster(Yii::app()->params['email']);
+        $feedTitle = Yii::$app->params['title'];
+        $rss       = new RSS($feedTitle, Yii::$app->request->hostInfo, Yii::$app->params['description']);
+        $rss->setWebMaster(Yii::$app->params['adminEmail']);
         $rss->setAuthor("Durban");
-        foreach ($models as $key => $value) {
+        foreach ($model as $key => $value) {
             $rss->addItem(
                 $value->title,
-                Yii::app()->createAbsoluteUrl('site/view', array('id' => $value->id)),
+                Url::to(['site/view', 'id' => $value->id]),
                 $value->description,
                 date('r', strtotime($value->create_date)),
-                Yii::app()->createAbsoluteUrl('site/view', array('id' => $value->id))
+                Url::to(['site/view', 'id' => $value->id])
             );
         }
 
