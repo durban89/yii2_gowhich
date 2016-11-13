@@ -19,13 +19,13 @@ use yii\helpers\Url;
             <li>
                 <a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=e89ae746d2e6747543fa74b3a65933d5185c4af29b11d46ad9c70cb302c744fa" title="IOS技术群:491229003">
                     <i class="fa fa-users"></i>
-                    IOS技术群:491229003
+                    iOS技术群:491229003
                 </a>
             </li>
             <li>
                 <a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=f82b94d01032fdd77b9ab4a8762497514991f848ebd1a831f0748716aaf8ac00" title="RN技术群:491310686">
                     <i class="fa fa-users"></i>
-                    RN技术群:491310686
+                    React Native群:491310686
                 </a>
             </li>
         </ul>

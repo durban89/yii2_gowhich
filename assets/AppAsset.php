@@ -27,6 +27,7 @@ class AppAsset extends AssetBundle
         'js/ripples.min.js',
         'js/custom.js',
     ];
+
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
