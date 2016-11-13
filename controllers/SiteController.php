@@ -156,17 +156,6 @@ class SiteController extends Controller
             ->offset(0)
             ->limit(50)->all();
 
-        // $criteria            = new CDbCriteria();
-        // $criteria->condition = 'is_lock = :is_lock AND is_delete = :is_delete';
-        // $criteria->order     = 'create_date DESC';
-        // $criteria->limit     = 50;
-        // $criteria->offset    = 0;
-        // $criteria->params    = array(
-        //     ':is_lock'   => 0,
-        //     ':is_delete' => 0,
-        // );
-        // $models = Blog::model()->findAll($criteria);
-
         //rss创建
         $feedTitle = Yii::$app->params['title'];
         $rss       = new RSS($feedTitle, Yii::$app->request->hostInfo, Yii::$app->params['description']);
@@ -182,7 +171,7 @@ class SiteController extends Controller
             );
         }
 
-        $this->render('feed', array('rss' => $rss->show()));
+        return $this->render('feed', array('rss' => $rss->show()));
     }
 
     public function actionVideo()

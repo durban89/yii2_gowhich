@@ -20,8 +20,8 @@ return [
     'author'                  => 'author/index',
 
     'feed/'                   => 'site/feed',
-    'sitemap.xsl/'            => 'site/sitemapxsl',
-    'sitemap.xml/'            => 'site/sitemap',
+    'sitemap.xml/'            => 'sitemap/index',
+    'sitemap.xsl/'            => 'sitemap/xsl',
 
     'video/'                  => 'site/video',
     'resource/'               => 'site/resource',
