@@ -51,12 +51,6 @@ Stylesheets for all the front pages display.
 }
 
 
-/* line 62, ../sass/styles.scss */
-
-.dropdown-menu {
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-}
-
 /* line 103, ../sass/styles.scss */
 
 article {
