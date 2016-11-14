@@ -4,9 +4,9 @@ namespace app\components;
 
 use yii\base\Widget;
 
-class ArticleWidget extends Widget
+class ArticleRowWidget extends Widget
 {
-    public $article;
+    public $articles;
 
     public function init()
     {
@@ -16,6 +16,6 @@ class ArticleWidget extends Widget
 
     public function run()
     {
-        return $this->render('article', ['article' => $this->article]);
+        return $this->render('article_row', ['articles' => $this->articles]);
     }
 }
