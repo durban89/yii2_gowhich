@@ -8,7 +8,7 @@ use yii\web\View;
 $this->registerJsFile('//gowhich.disqus.com/count.js', ['async' => true, 'id' => 'dsq-count-scr'], View::POS_END);
 ?>
 <?php if (isset($article)): ?>
-<article id="post-8" class="post-<?=$article->id;?> post type-post status-publish format-standard hentry category-uncategorized tag-html tag-wordpress">
+<article id="post-<?=$article->id;?>" class="post-<?=$article->id;?> post type-post status-publish format-standard hentry category-uncategorized tag-html tag-wordpress">
 
     <header class="entry-header">
         <h1><a href="<?=Url::to(['blog/view', 'id' => $article->id]);?>" rel="bookmark"><?=$article->title;?></a></h1>
@@ -38,3 +38,10 @@ $this->registerJsFile('//gowhich.disqus.com/count.js', ['async' => true, 'id' =>
     </footer>
 </article>
 <?php endif;?>
+
+<article style="text-align: center;">
+    <ul class="pager">
+      <li><a class="withripple" href="javascript:void(0)">Previous</a></li>
+      <li><a class="withripple" href="javascript:void(0)">Next</a></li>
+    </ul>
+</article>
