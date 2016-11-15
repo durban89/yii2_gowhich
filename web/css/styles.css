@@ -188,24 +188,6 @@ div.entry-content {
 }
 
 
-/* pagination */
-
-
-/* line 195, ../sass/styles.scss */
-
-.pager {
-  text-align: left;
-}
-
-
-/* line 199, ../sass/styles.scss */
-
-.pager > li {
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  margin: 10px 5px 0 0;
-}
-
-
 /* sidebar widgets */
 
 

@@ -39,9 +39,7 @@ $this->registerJsFile('//gowhich.disqus.com/count.js', ['async' => true, 'id' =>
 </article>
 <?php endif;?>
 
-<article style="text-align: center;">
-    <ul class="pager">
-      <li><a class="withripple" href="javascript:void(0)">Previous</a></li>
-      <li><a class="withripple" href="javascript:void(0)">Next</a></li>
-    </ul>
-</article>
+<ul class="pager">
+  <li><a class="withripple" href="javascript:void(0)">Previous</a></li>
+  <li><a class="withripple" href="javascript:void(0)">Next</a></li>
+</ul>
