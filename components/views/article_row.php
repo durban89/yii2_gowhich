@@ -34,7 +34,7 @@ $this->registerJsFile('//gowhich.disqus.com/count.js', ['async' => true, 'id' =>
             <?=TagWidget::widget(['tag' => $v->tag]);?>
             <li class="pull-right clear-right">
                 <i class="fa fa-comments"></i>
-                <span class="meta-reply"><a href="http://www.gowhich.com/blog/12#disqus_thread">One comment so far</a></span>
+                <span class="meta-reply"><a href="<?=Url::to(['blog/view', 'id' => $v->id, '#' => 'disqus_thread']);?>">One comment so far</a></span>
             </li>
         </ul>
     </footer>
