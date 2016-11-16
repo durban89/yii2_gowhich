@@ -2555,3 +2555,60 @@ tr {
 .fa-meanpath:before {
   content: "\f20c";
 }
+
+
+/*分享样式*/
+.jiathis_style_32x32 .jtico {
+  background-image: none !important;
+}
+.share-icon-container {
+  text-align: center;
+}
+.share-icon-container .jtico {
+  display: none !important;
+  display: inline-block !important;
+  height: 64px !important;
+  width: 64px;
+}
+.share-icon-container .icon {
+  background-image: none;
+  background-image: url('http://7sbph3.com1.z0.glb.clouddn.com/images/share_icon.png');
+  background-repeat: no-repeat;
+  display: inline-block !important;
+  height: 64px !important;
+  padding-left: 0 !important;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.share-icon-container .tsina {
+  background-position: -208px -400px;
+  width: 64px;
+}
+.share-icon-container .renren {
+  background-position: -112px -400px;
+  width: 64px;
+}
+.share-icon-container .douban {
+  background-position: -880px -208px;
+  width: 64px;
+}
+.share-icon-container .googleplus {
+  background-position: -976px -880px;
+  width: 64px;
+}
+.share-icon-container .fb {
+  background-position: -1072px -880px;
+  width: 64px;
+}
+.share-icon-container .twitter {
+  background-position: -304px -976px;
+  width: 64px;
+}
+.share-icon-container .linkedin {
+  background-position: -1168px -784px;
+  width: 64px;
+}
+.share-icon-container .tieba {
+  background-position: -400px -496px;
+  width: 64px;
+}

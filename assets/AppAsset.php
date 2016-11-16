@@ -20,7 +20,7 @@ class AppAsset extends AssetBundle
     public $css      = [
         'css/bootstrap-material-design.min.css',
         'css/ripples.min.css',
-        'css/styles.css',
+        'css/styles.css?v=2',
     ];
     public $js = [
         'js/material.min.js',
