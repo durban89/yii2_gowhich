@@ -30,16 +30,16 @@ $this->registerJsFile('//gowhich.disqus.com/count.js', ['async' => true, 'id' =>
         <ul class="list-inline entry-meta">
             <li class="meta-categories"> Categorized in <a href="<?=Url::to(['category/view', 'category' => Html::encode(urlencode($article->category->name))]);?>" rel="category"><?=$article->category->name;?></a> </li>
             <?=TagWidget::widget(['tag' => $article->tag]);?>
-            <li class="pull-right clear-right">
-                <i class="fa fa-comments"></i>
-                <span class="meta-reply"><a href="http://www.gowhich.com/blog/12#disqus_thread">One comment so far</a></span>
-            </li>
         </ul>
     </footer>
 </article>
 <?php endif;?>
 
 <ul class="pager">
-  <li><a class="withripple" href="javascript:void(0)">Previous</a></li>
-  <li><a class="withripple" href="javascript:void(0)">Next</a></li>
+    <?php if ($prevArticle): ?>
+    <li><a class="withripple" href="<?=Url::to(['blog/view', 'id' => $prevArticle->id]);?>">Previous</a></li>
+    <?php endif;?>
+    <?php if ($nextArticle): ?>
+    <li><a class="withripple" href="<?=Url::to(['blog/view', 'id' => $nextArticle->id]);?>">Next</a></li>
+    <?php endif;?>
 </ul>

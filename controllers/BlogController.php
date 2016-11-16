@@ -16,26 +16,25 @@ class BlogController extends \yii\web\Controller
         $model = Blog::find()->where(['id' => $id])->one();
 
         $this->blogClick($id);
-        $prev = $this->viewPrev($id);
-        $next = $this->viewNext($id);
+        $prev = $this->prevBlog($id);
+        $next = $this->nextBlog($id);
 
-        return $this->render('view', ['model' => $model]);
+        return $this->render('view', ['model' => $model, 'prev' => $prev, 'next' => $next]);
     }
 
     private function blogClick($id)
     {
-        $model = Blog::find()->where(['id' => $id]);
-        $model->read_sum += 1;
-        $model->save();
+        $model = Blog::findOne($id);
+        $model->updateCounters(['read_sum' => 1]);
     }
 
     private function prevBlog($id)
     {
-        return Blog::find()->where(['<', 'id', $id])->orderBy('id', SORT_DESC)->one();
+        return Blog::find()->where(['<', 'id', $id])->orderBy('id DESC')->one();
     }
 
     private function nextBlog($id)
     {
-        return Blog::find()->where(['>', 'id', $id])->orderBy('id', SORT_ASC)->one();
+        return Blog::find()->where(['>', 'id', $id])->orderBy('id ASC')->one();
     }
 }

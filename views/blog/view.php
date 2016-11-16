@@ -6,4 +6,4 @@ $this->title = $model->title . '-' . Yii::$app->params['name']; //$this->params[
 
 ?>
 
-<?=ArticleWidget::widget(['article' => $model]);?>
+<?=ArticleWidget::widget(['article' => $model, 'prevArticle' => $prev, 'nextArticle' => $next]);?>
