@@ -9,17 +9,6 @@ $this->title = $model->title . ' - ' . Yii::$app->params['name']; //$this->param
 <?=ArticleWidget::widget(['article' => $model, 'prevArticle' => $prev, 'nextArticle' => $next]);?>
 
 <!-- JiaThis Button BEGIN -->
-
-<div class="jiathis_style_32x32 share-icon-container">
-  <a class="jiathis_button_tsina icon tsina"></a>
-  <a class="jiathis_button_renren icon renren"></a>
-  <a class="jiathis_button_douban icon douban"></a>
-  <a class="jiathis_button_googleplus icon googleplus"></a>
-  <a class="jiathis_button_fb icon fb"></a>
-  <a class="jiathis_button_twitter icon twitter"></a>
-  <a class="jiathis_button_linkedin icon linkedin"></a>
-  <a class="jiathis_button_tieba icon tieba"></a>
-</div>
 <script type="text/javascript" >
 var jiathis_config={
 	data_track_clickback:true,

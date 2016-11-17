@@ -7,6 +7,7 @@ Stylesheets for all the front pages display.
 */
 
 @charset "UTF-8";
+
 /* line 33, ../sass/styles.scss */
 
 .sitelogo {
@@ -95,6 +96,7 @@ ul.list-inline.entry-meta {
 div.entry-content {
   margin-bottom: 25px;
 }
+
 
 /* line 135, ../sass/styles.scss */
 
@@ -2558,18 +2560,23 @@ tr {
 
 
 /*分享样式*/
+
 .jiathis_style_32x32 .jtico {
   background-image: none !important;
 }
+
 .share-icon-container {
   text-align: center;
+  height: 32px
 }
+
 .share-icon-container .jtico {
   display: none !important;
   display: inline-block !important;
   height: 64px !important;
   width: 64px;
 }
+
 .share-icon-container .icon {
   background-image: none;
   background-image: url('http://7sbph3.com1.z0.glb.clouddn.com/images/share_icon.png');
@@ -2580,35 +2587,59 @@ tr {
   margin-right: 10px;
   cursor: pointer;
 }
+
 .share-icon-container .tsina {
-  background-position: -208px -400px;
-  width: 64px;
+  background-position: -104px -200px;
+  width: 32px;
+  background-size: 672px 584px;
+  height: 32px !important;
 }
+
 .share-icon-container .renren {
-  background-position: -112px -400px;
-  width: 64px;
+  background-position: -56px -200px;
+  width: 32px;
+  background-size: 672px 584px;
+  height: 32px !important;
 }
+
 .share-icon-container .douban {
-  background-position: -880px -208px;
-  width: 64px;
+  background-position: -440px -104px;
+  width: 32px;
+  background-size: 672px 584px;
+  height: 32px !important;
 }
+
 .share-icon-container .googleplus {
-  background-position: -976px -880px;
-  width: 64px;
+  background-position: -488px -440px;
+  width: 32px;
+  background-size: 672px 584px;
+  height: 32px !important;
 }
+
 .share-icon-container .fb {
-  background-position: -1072px -880px;
-  width: 64px;
+  background-position: -536px -440px;
+  width: 32px;
+  background-size: 672px 584px;
+  height: 32px !important;
 }
+
 .share-icon-container .twitter {
-  background-position: -304px -976px;
-  width: 64px;
+  background-position: -152px -488px;
+  width: 32px;
+  background-size: 672px 584px;
+  height: 32px !important;
 }
+
 .share-icon-container .linkedin {
-  background-position: -1168px -784px;
-  width: 64px;
+  background-position: -584px -392px;
+  width: 32px;
+  background-size: 672px 584px;
+  height: 32px !important;
 }
+
 .share-icon-container .tieba {
-  background-position: -400px -496px;
-  width: 64px;
+  background-position: -200px -248px;
+  width: 32px;
+  background-size: 672px 584px;
+  height: 32px !important;
 }
