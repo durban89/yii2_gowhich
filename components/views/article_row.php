@@ -17,7 +17,7 @@ $this->registerJsFile('//gowhich.disqus.com/count.js', ['async' => true, 'id' =>
 
         <p class="entry-meta">
             <ul class="list-inline entry-meta">
-                <li class="meta-date"> Posted on <a href="https://wp-themes.com/?p=8" rel="date">
+                <li class="meta-date"> Posted on <a href="<?=Url::to(['archives/view', 'year' => date('Y', strtotime($v->create_date)), 'date' => date('m', strtotime($v->create_date))]);?>" rel="date">
                 <time datetime="<?=date('c', strtotime($v->create_date));?>" class="timeago"><?=date('m-d,Y', strtotime($v->create_date));?></time></a></li>
                 <li class="meta-author"> by <a href="<?=Url::to(['author/view', 'author' => $v->user->username]);?>" rel="author"><?=$v->user->username;?></a></li>
             </ul>
