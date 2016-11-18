@@ -2,7 +2,7 @@
 
 namespace app\components;
 
-use app\models\BlogCategory;
+use app\models\Type;
 use yii\base\Widget;
 
 class RightSidebarWidget extends Widget
@@ -17,7 +17,7 @@ class RightSidebarWidget extends Widget
     public function run()
     {
         //文章分类
-        $blogCategory = BlogCategory::find()->where(['is_deleted' => 0])->orderBy('id', 'DESC')->all();
+        $blogCategory = Type::find()->where(['is_delete' => 0, 'category' => 'blog'])->orderBy('id', 'DESC')->all();
 
         return $this->render('right_sidebar', compact('blogCategory'));
     }
