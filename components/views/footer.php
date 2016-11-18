@@ -5,7 +5,7 @@
                 &copy; <?=date('Y');?>
                 <a href="/"><?=Yii::$app->params['name'];?></a>
                 &#12288;
-                <a class="author-url" href="http://standew.com/klyment">Theme Material</a>
+                <a class="author-url" href="http://fezvrasta.github.io/bootstrap-material-design/">Theme Material</a>
             </p>
 
             <p class="pull-right"><?=Yii::powered();?></p>
