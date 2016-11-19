@@ -2,16 +2,14 @@
 use app\components\ArticleRowWidget;
 use yii\widgets\LinkPager;
 
-$this->title                   = Yii::$app->params['title'] . '-' . Yii::$app->params['name']; //$this->params['name'];
-$this->params['breadcrumbs'][] = 'Category';
+$this->title                   = Yii::$app->params['title'] . '-' . Yii::$app->params['name'];
+$this->params['breadcrumbs'][] = 'Archives';
 ?>
 
 <header class="page-header">
     <h3>
-        Category Archives for <?=$category;?>
+        Date Archives by <?=$year;?><?=$month ? '-' . $month : '';?>
     </h3>
-
-    <!-- <p>Category描述</p> -->
 
 </header>
 
