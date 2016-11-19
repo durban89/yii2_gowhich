@@ -8,7 +8,7 @@ $this->params['breadcrumbs'][] = 'Archives';
 
 <header class="page-header">
     <h3>
-        All Archives by <?=$year;?><?=$month ? '-' . $month : '';?>
+        Date Archives by <?=$year;?><?=$month ? '-' . $month : '';?>
     </h3>
 
 </header>

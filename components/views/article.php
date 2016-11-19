@@ -15,7 +15,7 @@ $this->registerJsFile('//gowhich.disqus.com/count.js', ['async' => true, 'id' =>
 
         <p class="entry-meta">
             <ul class="list-inline entry-meta">
-                <li class="meta-date"> Posted on <a href="<?=Url::to(['archives/view', 'year' => date('Y', strtotime($article->create_date)), 'date' => date('m', strtotime($article->create_date))]);?>" rel="date">
+                <li class="meta-date"> Posted on <a href="<?=Url::to(['archives/view', 'year' => date('Y', strtotime($article->create_date)), 'month' => date('m', strtotime($article->create_date))]);?>" rel="date">
                 <time datetime="<?=date('c', strtotime($article->create_date));?>" class="timeago"><?=date('m-d,Y', strtotime($article->create_date));?></time></a></li>
                 <li class="meta-author"> by <a href="<?=Url::to(['author/view', 'author' => $article->user->username]);?>" rel="author"><?=$article->user->username;?></a></li>
             </ul>
