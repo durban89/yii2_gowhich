@@ -81,6 +81,9 @@ class SiteController extends Controller
             ->limit($pagination->limit)
             ->all();
 
+        Yii::$app->view->registerMetaTag(['name' => 'keywords', 'content' => Yii::$app->params['keywords']]);
+        Yii::$app->view->registerMetaTag(['name' => 'description', 'content' => Yii::$app->params['description']]);
+
         return $this->render('index', [
             'models'     => $models,
             'pagination' => $pagination,
