@@ -29,6 +29,7 @@ return [
     'video/'                          => 'site/video',
     'resource/'                       => 'site/resource',
     'about/'                          => 'site/about',
+    'social/'                         => 'site/social',
 
     '/<t:.*?>'                        => 'site/index',
 ];
