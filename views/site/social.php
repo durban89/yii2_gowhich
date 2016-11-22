@@ -8,9 +8,13 @@ $this->params['breadcrumbs'][] = 'Social Hub';
 <div class="site-about">
     <h1>社交圈</h1>
 
-    <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
+	<ul>
+		<li>微博</li>
+		<li>twitter</li>
+		<li>facebook</li>
+		<li>google+</li>
+		<li>zhihu</li>
+	</ul>
 
 
 </div>
