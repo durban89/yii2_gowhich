@@ -430,4 +430,9 @@ class SiteController extends Controller
             'models' => $models,
         ));
     }
+
+    public function actionSocial()
+    {
+        return $this->render('social');
+    }
 }
